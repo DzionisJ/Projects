@@ -10,6 +10,12 @@ public class Cat extends Animal
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public int testindividual() 
+	{
+		int as = 112;
+		return as ;
+	}
 
 	@Override
 	public long How_Long_Has_This_Animal_Stayed_in_Shelter()

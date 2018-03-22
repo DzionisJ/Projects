@@ -35,10 +35,14 @@ public abstract class Animal
 		List<Animal> Allanimals = new ArrayList<Animal>();
 		
 		Random rng = new Random();
+		@SuppressWarnings("unused")
 		int ID; String[] names = {"Tom","Simon","Fluffy","Bastard","Doggo","Spooder"};
+		@SuppressWarnings("unused")
 		String rng_name; String[] species = {"Dog","Cat"};
+		@SuppressWarnings("unused")
 		String rng_species;
-		
+
+//********************* dogs below		
 		Animal one = new Dog();
 		one.setAnimalinfo(ID = rng.nextInt(100)+1, rng_name = names[new Random().nextInt(names.length)], 
 						  rng_species = species[new Random().nextInt(species.length)]);
@@ -48,10 +52,11 @@ public abstract class Animal
 		two.setAnimalinfo(ID = rng.nextInt(100)+1, rng_name = names[new Random().nextInt(names.length)], 
 						  rng_species = species[new Random().nextInt(species.length)]);
 		Allanimals.add(two);
+		
 //********************* cats below		
 		Animal three = new Cat(); 
 		three.setAnimalinfo(ID = rng.nextInt(100)+1, rng_name = names[new Random().nextInt(names.length)],		  
-						  rng_species = species[new Random().nextInt(species.length)]);
+						    rng_species = species[new Random().nextInt(species.length)]);
 		Allanimals.add(three);
 		
 		return Allanimals;
@@ -68,7 +73,7 @@ public abstract class Animal
 	{
 	}
 
-	static public void print(List<Animal> Allanimals) // printing all the animals that are in the list
+	static public void print(List<Animal> Allanimals) // printing all the animals that are in the list and the days spent in shelter
 	{
 		 for(int i=0; i<3; i++)
 		 {			

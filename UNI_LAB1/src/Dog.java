@@ -4,14 +4,18 @@ import java.util.Date;
 import java.util.Random;
 
 public class Dog extends Animal
-{
-	/*Random rng = new Random();
-	int answer = rng.nextInt(1000)+50;*/
-	
+{	
 	public Dog()
 	{
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public int testindividual() 
+	{
+		int as = 20;
+		
+		return as ;
 	}
 
 	@Override

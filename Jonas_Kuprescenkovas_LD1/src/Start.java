@@ -6,6 +6,16 @@ public class Start
 	{
 		Animal_shelter shelterAnimals = new Animal_shelter();
 	
+		for(shop thing:shelterAnimals)
+		{
+			// isvedu pradine kolekciju kolekcija su ju duomenimis
+			System.out.println(thing.id);
+			System.out.println("||=====================================================================================================||");
+			thing.showanimalinfo();
+
+		}
+		
+		System.out.println("||=====================================================================================================||");
 		shelterAnimals.sortbyfoodconsumption();
 		for(shop thing:shelterAnimals)   
 		{
@@ -20,9 +30,16 @@ public class Start
 		}
 		
 		System.out.println("||=====================================================================================================||");
+		shelterAnimals.sortbyjeans();
+		for(shop thing:shelterAnimals)   
+		{
+			System.out.println(thing.id +" : Sudraskyti dzinsai - " + thing.Allanimals.ripjeans);
+		}
+		
+		System.out.println("||=====================================================================================================||");
 		for(shop thing:shelterAnimals)
 		{
-			//TODO
+			// isvedu pradine kolekciju kolekcija su ju duomenimis isrikiuotais pagal dzinsu sudraskyma
 			System.out.println(thing.id);
 			System.out.println("||=====================================================================================================||");
 			thing.showanimalinfo();

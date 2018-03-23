@@ -21,17 +21,13 @@ public class shop
 			}
 				else if(randomanimal == 2)
 			{
-				Allanimals.add(new Cat()); //cia pabaigai pasilikau, kurti antra subclass 
+				Allanimals.add(new Cat()); // pabaigai pasilikau, kurti antra subclass 
 			}
 		}
 	}
 	
 	public void showanimalinfo() 
 	{
-		/*for(Animal ani: Allanimals)
-		{
-			System.out.println(ani);
-		}*/
 		for(Animal ani: Allanimals) 
 		{
 			System.out.println(ani.animalinfo());

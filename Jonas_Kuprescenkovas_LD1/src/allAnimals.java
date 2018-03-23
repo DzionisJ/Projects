@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 public class allAnimals extends ArrayList<Animal>
-{//sarasas visu gyvunu
+{
 	int allanimals;
 	int mostfood = 0;
 	int caughtmice = 0;
+	int ripjeans;
 	
 	public allAnimals(int animalcount)
 	{
@@ -32,7 +33,6 @@ public class allAnimals extends ArrayList<Animal>
 		return mostfood;
 	}
 	
-	
 	int MostCaughtMice() 
 	{
 		for(int i = 0; i < size(); i++) 
@@ -44,4 +44,19 @@ public class allAnimals extends ArrayList<Animal>
 		}
 		return caughtmice;
 	}
+	
+	int mostjeans()
+	{
+		for(int i = 0; i < size(); i++) 
+		{	
+			if(get(i) instanceof Dog) 
+			{
+				ripjeans = ((Dog)get(i)).rippedjeans();
+			}
+		}
+
+		return ripjeans;
+		
+	}
+	
 }

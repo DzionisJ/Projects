@@ -12,10 +12,10 @@ int avgCaughtMicePerDay = 2;
 	//avgCaughtMicePerDay = rng.nextInt(3)+1;
 	}
 	
-	Cat()
+	/*Cat()
 	{
 		super();
-	}
+	}*/
 	
 	public int allCaughtMice()
 	{

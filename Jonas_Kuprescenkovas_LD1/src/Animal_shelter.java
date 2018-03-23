@@ -11,7 +11,7 @@ public class Animal_shelter extends ArrayList<shop>
      
 	Animal_shelter()
 	{
-	     randomAnimalamountinShop = RNG.nextInt(5)+1; // generuojam random kiekik gyvunu
+	     randomAnimalamountinShop = RNG.nextInt(5)+1; // generuojam random kieki gyvunu
 		//randomAnimalamountinShop=5;
 
 		for(int i = 0; i < 5; i++) 
@@ -28,4 +28,8 @@ public class Animal_shelter extends ArrayList<shop>
 	{
         Collections.sort(this, new MostCaughtMiceComparator());
     }
+	void sortbyjeans()
+	{
+		Collections.sort(this, new findmostrippedjeans());
+	}
 }

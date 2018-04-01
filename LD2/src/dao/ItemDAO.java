@@ -26,4 +26,9 @@ public class ItemDAO
 		// TODO Auto-generated method stub
 		return list;
 	}
+	
+	public void addItem(Item newItem)
+	{
+		
+	}
 }

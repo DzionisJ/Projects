@@ -46,6 +46,7 @@ public class ItemApp extends JFrame {
 	 */
 	public ItemApp() 
 	{
+		setTitle("Items In Storage");
 		itemDAO = new ItemDAO();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,6 +95,18 @@ public class ItemApp extends JFrame {
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(btnSearch);
+		
+		JButton btnAddNewItem = new JButton("Add new Item");
+		btnAddNewItem.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				AddNewItemWindow adnew = new AddNewItemWindow();
+				adnew.setVisible(true);
+			}
+		});
+		btnAddNewItem.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel.add(btnAddNewItem);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);

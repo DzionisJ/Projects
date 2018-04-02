@@ -96,23 +96,30 @@ public class ItemApp extends JFrame {
 		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(btnSearch);
 		
-		JButton btnAddNewItem = new JButton("Add new Item");
-		btnAddNewItem.addActionListener(new ActionListener() 
+		JButton btnAddItem = new JButton("Add Item");
+		btnAddItem.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent arg0) 
+			public void actionPerformed(ActionEvent arg0)
 			{
-				AddNewItemWindow adnew = new AddNewItemWindow();
-				adnew.setVisible(true);
+				AddItemDialog dialog = new AddItemDialog(ItemApp.this, itemDAO);
+				dialog.setVisible(true);
 			}
 		});
-		btnAddNewItem.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		panel.add(btnAddNewItem);
+		btnAddItem.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel.add(btnAddItem);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+	}
+	
+	public void refreshItemView()
+	{
+		//itemDAO.getAllItems();
+		ItemTableModel mdl = new ItemTableModel(itemDAO.getAllItems());
+		table.setModel(mdl);
 	}
 
 	/*public Object getItemName() {

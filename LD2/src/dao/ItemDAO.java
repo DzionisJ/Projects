@@ -11,8 +11,8 @@ public class ItemDAO
 	
 	public ItemDAO()
 	{
-		list.add(new Item("King Shrimp", 20, 300));
-		list.add(new Item("Salmon file", 12, 1300));
+		list.add(new Item("King Shrimp", 20d, 300d));
+		list.add(new Item("Salmon file", 12d, 1300d));
 	}
 
 	public List<Item> searchItems(String name) 
@@ -29,6 +29,6 @@ public class ItemDAO
 	
 	public void addItem(Item newItem)
 	{
-		
+		list.add(newItem);	
 	}
 }

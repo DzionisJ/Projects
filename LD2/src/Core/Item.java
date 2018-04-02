@@ -2,31 +2,31 @@ package Core;
 
 public class Item 
 {
-	private String Name; private int price; private int weight;
+	private String Name; private Double price; private Double weight;
 	public String getName() {
 		return Name;
 	}
 	public void setName(String name) {
 		Name = name;
 	}
-	public int getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public int getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
-	public void setWeight(int weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 	
-	public Item(String name, int price, int weight) {
+	public Item(String name, Double price2, Double weight2) {
 		//super();
 		Name = name;
-		this.price = price;
-		this.weight = weight;
+		this.price = price2;
+		this.weight = weight2;
 	}
 	
 	@Override

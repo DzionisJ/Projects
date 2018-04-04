@@ -6,11 +6,12 @@ import Core.Item;
 
 public class ItemTableModel extends AbstractTableModel
 {
-	private static final int ITEM_NAME_COL = 0;
-	private static final int ITEM_PRICE_COL  = 1;
-	private static final int ITEM_WEIGHT_COL  = 2;
+	private static final int ITEM_ID = 0;
+	private static final int ITEM_NAME_COL = 1;
+	private static final int ITEM_PRICE_COL  = 2;
+	private static final int ITEM_WEIGHT_COL  = 3;
 	private List<Item> items;
-	private String[] columnNames = {"Item Name", "Item Price/Kg", "Item Total Weight Kg"};
+	private String[] columnNames = {"ID", "Item Name", "Item Price/Kg", "Item Total Weight Kg"};
 
 	@Override
 	public int getColumnCount() 
@@ -43,6 +44,8 @@ public class ItemTableModel extends AbstractTableModel
 		Item tempItem = items.get(row);
 		switch(col) 
 		{
+		case ITEM_ID:
+			return tempItem.getID();
 		case ITEM_NAME_COL:
 		    return tempItem.getName();
 		case ITEM_PRICE_COL:

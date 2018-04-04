@@ -2,7 +2,7 @@ package Core;
 
 public class Item 
 {
-	private String Name; private Double price; private Double weight;
+	private String Name; private Double price; private Double weight; private double ID;
 	public String getName() {
 		return Name;
 	}
@@ -22,16 +22,23 @@ public class Item
 		this.weight = weight;
 	}
 	
-	public Item(String name, Double price2, Double weight2) {
+	public Item(double id, String name, Double price2, Double weight2) {
 		//super();
+		this.ID = id;
 		Name = name;
 		this.price = price2;
 		this.weight = weight2;
 	}
-	
+	public double getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
 	@Override
     public String toString()
 	{
-        return getName()+" "+ getPrice()+" "+getWeight();
+        return getID()+" "+getName()+" "+ getPrice()+" "+getWeight();
     }
+	
 }

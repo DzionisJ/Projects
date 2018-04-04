@@ -27,6 +27,7 @@ public class AddItemDialog extends JDialog {
 	
 	private ItemDAO itemDAO;
 	private ItemApp itemAPP;
+	private JTextField textFieldID;
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +46,7 @@ public class AddItemDialog extends JDialog {
 	 */
 	public AddItemDialog() 
 	{
-		setBounds(100, 100, 346, 191);
+		setBounds(100, 100, 348, 225);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,6 +68,13 @@ public class AddItemDialog extends JDialog {
 		textFieldWeight = new JTextField();
 		textFieldWeight.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textFieldWeight.setColumns(10);
+		
+		JLabel lblItemId = new JLabel("Item ID");
+		lblItemId.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		textFieldID = new JTextField();
+		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textFieldID.setColumns(10);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -82,10 +90,14 @@ public class AddItemDialog extends JDialog {
 							.addGap(18)
 							.addComponent(textFieldPrice, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(labelWeight, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(labelWeight, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblItemId, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldWeight, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(241, Short.MAX_VALUE))
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(textFieldID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldWeight, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(127, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -102,7 +114,11 @@ public class AddItemDialog extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelWeight, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldWeight, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(134, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblItemId)
+						.addComponent(textFieldID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(20, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
@@ -132,11 +148,12 @@ public class AddItemDialog extends JDialog {
 	
 	public void saveItem()
 	{
+		Double ID = Double.parseDouble(textFieldID.getText());
 		String name = textFieldName.getText();
 		Double Price = Double.parseDouble(textFieldPrice.getText());
 		Double Weight = Double.parseDouble(textFieldWeight.getText());
 		
-		Item tempItem = new Item(name, Price, Weight);
+		Item tempItem = new Item(ID, name, Price, Weight);
 		itemDAO.addItem(tempItem);
 		setVisible(false);
 		dispose();

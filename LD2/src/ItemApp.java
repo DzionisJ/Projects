@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -84,8 +85,15 @@ public class ItemApp extends JFrame {
 				}
 				else
 				{
-					allitems = itemDAO.getAllItems();
+					allitems = itemDAO.getAllItems(); // DB
+					try {
+						ItemDAO.getConnection();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+				
 				
 				//for(Core.Item temp: allitems) {System.out.println(temp);}
 				

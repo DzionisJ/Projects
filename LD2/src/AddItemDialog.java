@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class AddItemDialog extends JDialog {
@@ -28,6 +29,7 @@ public class AddItemDialog extends JDialog {
 	private ItemDAO itemDAO;
 	private ItemApp itemAPP;
 	private JTextField textFieldID;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -46,6 +48,8 @@ public class AddItemDialog extends JDialog {
 	 */
 	public AddItemDialog() 
 	{
+		setTitle("Add New Items");
+		
 		setBounds(100, 100, 348, 225);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,23 +85,21 @@ public class AddItemDialog extends JDialog {
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblItemName)
+						.addComponent(labelPriceperKg, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelWeight, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblItemId, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+					.addGap(25)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(lblItemName)
-							.addGap(18)
-							.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(textFieldName, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+								.addComponent(textFieldPrice)
+								.addComponent(textFieldWeight))
+							.addContainerGap(97, Short.MAX_VALUE))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(labelPriceperKg, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(textFieldPrice, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(labelWeight, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblItemId, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldWeight, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(127, Short.MAX_VALUE))
+							.addComponent(textFieldID, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+							.addGap(97))))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -106,19 +108,19 @@ public class AddItemDialog extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblItemName)
 						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+					.addGap(7)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(labelPriceperKg, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldPrice, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelWeight, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldWeight, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblItemId)
 						.addComponent(textFieldID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(20, Short.MAX_VALUE))
+					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
@@ -126,27 +128,30 @@ public class AddItemDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Add");
-				okButton.addActionListener(new ActionListener() 
+				JButton AddItemButton = new JButton("Add Item");
+				AddItemButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				AddItemButton.addActionListener(new ActionListener() 
 				{
 					public void actionPerformed(ActionEvent arg0)
 					{
-						saveItem();
+						try {
+							saveItem();
+						} catch (SQLException e) 
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						itemAPP.refreshItemView();
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				AddItemButton.setActionCommand("OK");
+				buttonPane.add(AddItemButton);
+				getRootPane().setDefaultButton(AddItemButton);
 			}
 		}
 	}
 	
-	public void saveItem()
+	public void saveItem() throws SQLException
 	{
 		Double ID = Double.parseDouble(textFieldID.getText());
 		String name = textFieldName.getText();
@@ -154,11 +159,12 @@ public class AddItemDialog extends JDialog {
 		Double Weight = Double.parseDouble(textFieldWeight.getText());
 		
 		Item tempItem = new Item(ID, name, Price, Weight);
-		itemDAO.addItem(tempItem);
+		itemDAO.addItem(tempItem); 
+		itemAPP.refreshItemView();
 		setVisible(false);
 		dispose();
-		itemAPP.refreshItemView();
 	}
+	
 	
 	
 	public AddItemDialog(ItemApp theItemApp, ItemDAO theitemDAO)

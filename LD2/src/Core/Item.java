@@ -29,6 +29,7 @@ public class Item
 		this.price = price2;
 		this.weight = weight2;
 	}
+	
 	public double getID() {
 		return ID;
 	}

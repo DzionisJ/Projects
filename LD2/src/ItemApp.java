@@ -82,14 +82,22 @@ public class ItemApp extends JFrame {
 				if(name != null && name.trim().length()>0)
 				{
 					allitems = itemDAO.searchItems(name);
+					try
+					{
+						ItemDAO.getSpecificItems(name);
+					} catch (SQLException e)
+					{
+						e.printStackTrace();
+					}
 				}
 				else
 				{
 					allitems = itemDAO.getAllItems(); // DB
-					try {
+					try
+					{
 						ItemDAO.getConnection();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+					} catch (SQLException e) 
+					{
 						e.printStackTrace();
 					}
 				}
@@ -128,7 +136,10 @@ public class ItemApp extends JFrame {
 		//itemDAO.getAllItems();
 		ItemTableModel mdl = new ItemTableModel(itemDAO.getAllItems());
 		table.setModel(mdl);
+		
 	}
+	
+	
 
 	/*public Object getItemName() {
 		// TODO Auto-generated method stub

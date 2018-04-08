@@ -13,7 +13,7 @@ public class ItemTableModel extends AbstractTableModel
 	private List<Item> items;
 	private String[] columnNames = {"ID", "Item Name", "Item Price/Kg", "Item Total Weight Kg"};
 
-	@Override
+	@Override 
 	public int getColumnCount() 
 	{
 		return columnNames.length;

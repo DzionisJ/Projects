@@ -21,7 +21,7 @@ public class Item
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
-	
+	 
 	public Item(double id, String name, Double price2, Double weight2) {
 		//super();
 		this.ID = id;

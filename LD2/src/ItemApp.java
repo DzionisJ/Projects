@@ -69,7 +69,7 @@ public class ItemApp extends JFrame {
 		textFieldEnteredID = new JTextField();
 		textFieldEnteredID.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(textFieldEnteredID);
-		textFieldEnteredID.setColumns(10);
+		textFieldEnteredID.setColumns(10); 
 		
 		JButton btnSearch = new JButton("SEARCH");
 		btnSearch.addActionListener(new ActionListener() 

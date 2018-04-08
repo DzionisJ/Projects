@@ -148,7 +148,7 @@ public class AddItemDialog extends JDialog {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}
+					} 
 				});
 				AddItemButton.setActionCommand("OK");
 				buttonPane.add(AddItemButton);

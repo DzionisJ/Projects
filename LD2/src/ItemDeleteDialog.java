@@ -92,7 +92,7 @@ public class ItemDeleteDialog extends JDialog {
 							}
 						}
 						
-					}
+					} 
 				});
 				DeleteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				DeleteButton.setActionCommand("OK");

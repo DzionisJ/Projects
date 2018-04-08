@@ -11,7 +11,7 @@ import java.util.List;
 
 import Core.Item;
 
-public class ItemDAO 
+public class ItemDAO  
 {
 	static List<Item> list = new ArrayList<>();
 	

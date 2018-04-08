@@ -142,6 +142,12 @@ public class AddItemDialog extends JDialog {
 							e.printStackTrace();
 						}
 						itemAPP.refreshItemView();
+						try {
+							ItemDAO.getConnection();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				});
 				AddItemButton.setActionCommand("OK");

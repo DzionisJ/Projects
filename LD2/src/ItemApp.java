@@ -22,14 +22,14 @@ import javax.swing.JScrollPane;
 public class ItemApp extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textFieldEnteredName;
+	private JTextField textFieldEnteredID;
 	private ItemDAO itemDAO;
 	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,7 +41,7 @@ public class ItemApp extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -62,29 +62,30 @@ public class ItemApp extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblEnterItemName = new JLabel("Enter Item Name");
-		lblEnterItemName.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		panel.add(lblEnterItemName);
+		JLabel lblEnterItemID = new JLabel("Enter Item ID");
+		lblEnterItemID.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel.add(lblEnterItemID);
 		
-		textFieldEnteredName = new JTextField();
-		textFieldEnteredName.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		panel.add(textFieldEnteredName);
-		textFieldEnteredName.setColumns(10);
+		textFieldEnteredID = new JTextField();
+		textFieldEnteredID.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel.add(textFieldEnteredID);
+		textFieldEnteredID.setColumns(10);
 		
 		JButton btnSearch = new JButton("SEARCH");
 		btnSearch.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				String name = textFieldEnteredName.getText();
+				
+				String ID = textFieldEnteredID.getText();
 				List<Core.Item> allitems = null;
 				
-				if(name != null && name.trim().length()>0)
+				if(ID != null && ID.trim().length()>0)
 				{
-					allitems = itemDAO.searchItems(name);
+					allitems = itemDAO.searchItems(ID);
 					try
 					{
-						ItemDAO.getSpecificItems(name);
+						ItemDAO.getSpecificItems(ID);
 					} catch (SQLException e)
 					{
 						e.printStackTrace();
@@ -106,6 +107,7 @@ public class ItemApp extends JFrame {
 				//for(Core.Item temp: allitems) {System.out.println(temp);}
 				
 				ItemTableModel model = new ItemTableModel(allitems);
+				
 				table.setModel(model);
 			}
 		});
@@ -124,6 +126,17 @@ public class ItemApp extends JFrame {
 		btnAddItem.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(btnAddItem);
 		
+		JButton btnDeleteItem = new JButton("Delete Item");
+		btnDeleteItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				ItemDeleteDialog dialoger = new ItemDeleteDialog(ItemApp.this, itemDAO);
+				dialoger.setVisible(true);
+			}
+		});
+		btnDeleteItem.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel.add(btnDeleteItem);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
@@ -133,8 +146,9 @@ public class ItemApp extends JFrame {
 	
 	public void refreshItemView()
 	{
+		
 		//itemDAO.getAllItems();
-		ItemTableModel mdl = new ItemTableModel(itemDAO.getAllItems());
+		ItemTableModel	mdl = new ItemTableModel(itemDAO.getAllItems());
 		table.setModel(mdl);
 		
 	}

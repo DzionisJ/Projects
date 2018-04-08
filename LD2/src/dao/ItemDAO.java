@@ -18,15 +18,16 @@ public class ItemDAO
 	public ItemDAO()
 	{
 		//list.add(new Item(1d,"King Shrimp", 20d, 300d));
-		//list.add(new Item(2,"Salmon file", 12d, 1300d));
+		//list.add(new Item(2d,"Salmon file", 12d, 1300d));
 	}
 
 	public List<Item> searchItems(String name)
 	{
+		list.clear();
 		return list; 
 	}
 	
-	public static Connection getSpecificItems(String name) throws SQLException
+	public static Connection getSpecificItems(String ID) throws SQLException
 	{
 		try
 		{
@@ -38,7 +39,7 @@ public class ItemDAO
 		System.out.println("DB connected successfully!");
 		
 		//String query = "Select * from item";
-		String query = ("select * from Item where Name =" + "'" +name+ "'") ;
+		String query = ("select * from Item where ID =" + "'" +ID+ "'") ;
 		Statement st = conn.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		
@@ -54,6 +55,7 @@ public class ItemDAO
 
 	public List<Item> getAllItems()
 	{
+		list.clear();
 		return list;
 	}
 	
@@ -134,7 +136,6 @@ public class ItemDAO
 		System.out.println("DB connected successfully!");
 		
 		String query = "Select * from item";
-		//String query = ("select * from Item where Name =" + "'" + "Frozen Cherries" + "'") ;
 		Statement st = conn.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		
@@ -160,6 +161,43 @@ public class ItemDAO
 		
 		   list.add(tempitem);
 		   return tempitem;
+	}
+	
+	public static void deleteIdem(Double ID) throws SQLException
+	{
+		Connection dbConnection = null;
+			
+		PreparedStatement preparedStatement = null;
+		String DeleteITEMSQL=  "Delete from Item where ID = ?";
+
+		try {
+			dbConnection = addtoSQL();
+			preparedStatement = dbConnection.prepareStatement(DeleteITEMSQL);
+			preparedStatement.setDouble(1, ID);
+			// execute insert SQL stetement
+			preparedStatement.executeUpdate();
+			
+			System.out.println("Item Deleted Successfully !");
+		
+		} catch (SQLException e)
+		{
+
+			System.out.println(e.getMessage());
+
+		} finally 
+		{
+
+			if (preparedStatement != null) 
+			{
+				preparedStatement.close();
+			}
+
+			if (dbConnection != null) 
+			{
+				dbConnection.close();
+			}
+
+		}
 	}
 	
 }
